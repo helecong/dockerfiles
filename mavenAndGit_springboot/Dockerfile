@@ -9,3 +9,5 @@ ARG git_user_email="hlc@wkhtm.com"
 RUN git config --global user.name ${git_user_name}
 RUN git config --global user.email ${git_user_email}
 
+COPY ./start.sh /user/src/start.sh
+RUN chmod 777 /user/src/start.sh
