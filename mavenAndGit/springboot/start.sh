@@ -33,16 +33,17 @@ if [ -n "${mvnOrder}"];
 then
 	mvnOrder = -Dmaven.test.skip=true
 else
-    mvnOrder = mvnOrder + ' -Xmx512m -Dmaven.test.skip=true'
+    mvnOrder = mvnOrder + ' -Dmaven.test.skip=true'
 
 fi
 
-if [ ! -d "${folder}" ]; 
+if [ -d "${folder}" ]; 
 then
 
-git clone --branch ${branch} ${git}
+    rm -rf ${folder}
 
 fi
+git clone --branch ${branch} ${git}
 
 ls
 
@@ -57,5 +58,5 @@ mvn clean -Dmaven.test.skip=true install
 
 cd ${appFloader}
 
-mvn ${mvnOrder} spring-boot:run
+mvn ${mvnOrder} spring-boot:run -Drun.jvmArguments="-Xmx512m"
 
